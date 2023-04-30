@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 const Todo = () => {
     const [inputData, setInputData] = useState('');
     const [items,setItems] = useState([]);
-    const [editItems, setEditItems] = useState(null);
+    const [editItems,setEditItems] = useState(null);
     const [toggleBtn, setToggleBtn] = useState(true);
     const [isEditItem,setIsEditItem] = useState(null);
 
@@ -58,35 +58,45 @@ const Todo = () => {
     }
 
     return (
-    <>
-        <div className='main-div'>
+    <div className='h-[800px]'>
+        
+        <div className='main-div flex justify-center '>
             <div className='child-div'>
-                <div className='addItems'>
-                    <input type="text" placeholder='Add Itmes...' value={inputData} onChange={(e)=> setInputData(e.target.value)}/>
-                    {toggleBtn ? <button title='Add Items' onClick={addItem}>+</button> : 
-                    <button title='Add Items' onClick={addItem}>Edit</button>}
+                <div className='addItems my-12'>
+                    <h1 className='font-bold font-mono text-xl my-2'>Todo List</h1>
+                    <input className='w-[341px] p-[12px] border font-mono border-black font-bold bg-gray-200' type="text" placeholder='Add Itmes...' value={inputData} onChange={(e)=> setInputData(e.target.value)}/>
+                    {toggleBtn ? <button className='border border-black w-[50px] h-[50px] bg-green-600' title='Add Items' onClick={addItem}>+</button> : 
+                    <button className='border border-black w-[50px] h-[50px]' title='Add Items' onClick={addItem}>E</button>}
                     
                 </div>
-                <div className='showItems'>
+                <div className='showItems my-8'>
                     {
                         items.map((curr) => {
                            return (
-                                <div className='eachItem' key={curr.id}>
-                                    <span>{curr.name}</span>
-                                    <button onClick={()=> deleteItem(curr.id)}>Delete</button>
-                                    <button onClick={()=> editItem(curr.id)}>Edit</button>
+
+                            <>
+                                <div className='eachItem border  border-black w-[341px] bg-gray-300 p-1 font-bold my-2 overflow-scroll' key={curr.id}>
+                                    <span className='mr-[123px] font-mono overflow-hidden'>{curr.name}</span>
+                                   <div className=''>
+                                   <button className='w-[35px] h-[35px] bg-red-600 mr-2' onClick={()=> deleteItem(curr.id)}>D</button>
+                                        <button className=' w-[35px] h-[35px] bg-green-400' onClick={()=> editItem(curr.id)}>E</button>
+                                   </div>
+
                                 </div>
+                               
+                            
+                            </>
                            ) 
                         })
 
                     }
                 </div>
                <div>
-                    <button onClick={removeAllItems}>Remove All</button>
+                    <button className='bg-red-600 w-[8.5rem] h-[3.2rem]' onClick={removeAllItems}>Remove All</button>
                </div>
             </div>
         </div>
-    </>
+    </div>
   )
 }
 
